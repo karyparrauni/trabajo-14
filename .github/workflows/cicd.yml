@@ -185,3 +185,27 @@ jobs:
             echo "Tags: ${{ steps.meta.outputs.tags }}"
             echo "Digest: ${{ steps.build.outputs.digest }}"
           } >> "$GITHUB_STEP_SUMMARY"
+
+  # ── Job 5: Threat Modeling con Threagile ───────────────
+  threat-modeling:
+    name: Threat Model Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      # Descarga el código del repositorio en el runner
+      - name: Checkout Workspace
+        uses: actions/checkout@v4
+
+      # Ejecuta el análisis automático del modelo de amenazas
+      - name: Run Threagile
+        id: threagile
+        uses: threagile/run-threagile-action@v1
+        with:
+          model-file: 'threagile.yaml'
+
+      # Guarda los reportes generados por Threagile
+      - name: Archive Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: threagile-report
+          path: threagile/output
