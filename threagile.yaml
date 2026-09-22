@@ -330,8 +330,19 @@ technical_assets:
 
 
 trust_boundaries:
-
-
+  notes-app-network:
+    id: notes-app-network
+    title: Red Interna de la Notes App
+    description: Límite de confianza de la red privada de contenedores.
+    type: execution-environment
+    technical_assets_inside:
+      - nginx
+      - backend
+      - postgres
+      - prometheus
+      - grafana
+      - node-exporter
+      - cadvisor
 
 
 shared_runtimes:
